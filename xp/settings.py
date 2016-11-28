@@ -12,12 +12,16 @@ MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'forum',                      # Or path to database file if using sqlite3.
+        # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+        'ENGINE': 'django.db.backends.mysql',
+        # Or path to database file if using sqlite3.
+        'NAME': 'forum',
         # The following settings are not used with sqlite3:
         'USER': 'root',
         'PASSWORD': '',
-        'HOST': '127.0.0.1',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
+        # Empty for localhost through domain sockets or '127.0.0.1' for
+        # localhost through TCP.
+        'HOST': '127.0.0.1',
         'PORT': '3306',                      # Set to empty string for default.
     }
 }
@@ -40,7 +44,7 @@ SITE_ID = 1
 
 # If you set this to False, Django will make some optimizations so as not
 # to load the internationalization machinery.
-USE_I18N = True # 只有用admin的时候需要开启
+USE_I18N = True  # 只有用admin的时候需要开启
 
 # If you set this to False, Django will not format dates, numbers and
 # calendars according to the current locale.
@@ -80,7 +84,7 @@ STATICFILES_DIRS = (
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-#    'django.contrib.staticfiles.finders.DefaultStorageFinder',
+    #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
 
 # Make this unique, and don't share it with anybody.
@@ -90,19 +94,20 @@ SECRET_KEY = 'h6=yzee&jze#4p1@twhksg1wg6hv%pzwomw(!o($qsly%lzlhe'
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
-#     'django.template.loaders.eggs.Loader',
+    #     'django.template.loaders.eggs.Loader',
 )
 
 MIDDLEWARE_CLASSES = (
-    'django.middleware.cache.UpdateCacheMiddleware', # 缓存中间件，必须放在开头
+    'django.middleware.cache.UpdateCacheMiddleware',  # 缓存中间件，必须放在开头
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware', # 开启了CSRF,记得在POST表单中加{% csrf_token %},使用RequestContext
+    # 开启了CSRF,记得在POST表单中加{% csrf_token %},使用RequestContext
+    'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     # Uncomment the next line for simple clickjacking protection:
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'django.middleware.cache.FetchFromCacheMiddleware', # 缓存中间件，必须放在最后
+    'django.middleware.cache.FetchFromCacheMiddleware',  # 缓存中间件，必须放在最后
 )
 
 ROOT_URLCONF = 'xp.urls'
@@ -116,11 +121,11 @@ TEMPLATE_DIRS = (
     # Don't forget to use absolute paths, not relative paths.
 )
 
-TEMPLATE_CONTEXT_PROCESSORS = ( # F2E中有current_user对象和request对象,这里设置可在模板中使用RquestContext
-    'django.contrib.auth.context_processors.auth', # user对象等等
-    'django.core.context_processors.request', # request对象等等
-    'django.core.context_processors.static', # 在模板中使用{{ STATIC_URL }}获取静态文件路径
-    'forum.context_processors.custom_proc', # 自定义模板上下文处理器
+TEMPLATE_CONTEXT_PROCESSORS = (  # F2E中有current_user对象和request对象,这里设置可在模板中使用RquestContext
+    'django.contrib.auth.context_processors.auth',  # user对象等等
+    'django.core.context_processors.request',  # request对象等等
+    'django.core.context_processors.static',  # 在模板中使用{{ STATIC_URL }}获取静态文件路径
+    'forum.context_processors.custom_proc',  # 自定义模板上下文处理器
 )
 
 INSTALLED_APPS = (
@@ -134,7 +139,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
-    'django.contrib.sitemaps', # Django sitemap framework
+    'django.contrib.sitemaps',  # Django sitemap framework
     'forum',
 )
 
@@ -175,14 +180,14 @@ LOGGING = {
     }
 }
 
-CACHES = { # memcached缓存设置
+CACHES = {  # memcached缓存设置
     'default': {
         'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
         'LOCATION': '127.0.0.1:11211',
     }
 }
 
-SESSION_ENGINE = 'django.contrib.sessions.backends.cache' # 使用memcached存储session
+SESSION_ENGINE = 'django.contrib.sessions.backends.cache'  # 使用memcached存储session
 
 # 自定义User类
 AUTH_USER_MODEL = 'forum.ForumUser'
@@ -196,9 +201,10 @@ LOGIN_URL = '/login/'
 # 发送邮件设置
 EMAIL_HOST = 'smtp.qq.com'
 EMAIL_PORT = 25
-EMAIL_HOST_USER= '*********'
-EMAIL_HOST_PASSWORD= '******'
+EMAIL_HOST_USER = '*********'
+EMAIL_HOST_PASSWORD = '******'
 DEFAULT_FROM_EMAIL = '*********@qq.com'
 
 # 注册用户保留关键字，非Django设置
-RESERVED = ["user", "topic", "home", "setting", "forgot", "login", "logout", "register", "admin"]
+RESERVED = ["user", "topic", "home", "setting",
+            "forgot", "login", "logout", "register", "admin"]
